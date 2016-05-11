@@ -1,0 +1,81 @@
+package gapp.model;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+@Entity
+@Table(name = "additionalFieldValue")
+public class AdditionalFieldValue implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue	
+	private Integer fieldValue_id;	
+	private String value;
+	
+	
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	private Applications application;
+	
+	
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	private AdditionalField field;
+
+	public AdditionalFieldValue()
+	{
+		
+	}
+
+	public Integer getFieldValue_id() {
+		return fieldValue_id;
+	}
+
+
+	public void setFieldValue_id(Integer fieldValue_id) {
+		this.fieldValue_id = fieldValue_id;
+	}
+
+
+	public String getValue() {
+		return value;
+	}
+
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+
+	public Applications getApplication() {
+		return application;
+	}
+
+
+	public void setApplication(Applications application) {
+		this.application = application;
+	}
+
+
+	public AdditionalField getField() {
+		return field;
+	}
+
+
+	public void setField(AdditionalField field) {
+		this.field = field;
+	}
+
+	
+}
+

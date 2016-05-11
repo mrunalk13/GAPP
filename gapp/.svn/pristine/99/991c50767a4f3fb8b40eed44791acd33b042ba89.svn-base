@@ -1,0 +1,12 @@
+package gapp.model.dao;
+
+import java.util.List;
+
+import gapp.model.Applications;
+
+public interface ApplicationsDao {
+
+    List<Applications> getApplications(String Department,String Term);
+    List<Applications> getApplications(String username);
+    
+}

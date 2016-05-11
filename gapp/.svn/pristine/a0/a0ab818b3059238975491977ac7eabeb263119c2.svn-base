@@ -1,0 +1,185 @@
+
+    create table additionalField (
+        field_id int4 not null,
+        name varchar(255),
+        required boolean,
+        type varchar(255),
+        dept_dept_id int4,
+        primary key (field_id)
+    );
+
+    create table additionalFieldValue (
+        fieldValue_id int4 not null,
+        value varchar(255),
+        application_application_id int4,
+        field_field_id int4,
+        primary key (fieldValue_id)
+    );
+
+    create table applications (
+        application_id int4 not null,
+        cin int4,
+        citizenship varchar(255),
+        dob timestamp,
+        gender varchar(255),
+        toefl int4,
+        transcript bytea,
+        dept_dept_id int4,
+        program_program_id int4,
+        status_status_id int4,
+        term_term_id int4,
+        user_user_id int4,
+        primary key (application_id)
+    );
+
+    create table applicationstatus (
+        status_id int4 not null,
+        status varchar(255),
+        primary key (status_id)
+    );
+
+    create table degrees (
+        degree_id int4 not null,
+        GPA float4,
+        college varchar(255),
+        degree varchar(255),
+        major varchar(255),
+        time_period varchar(255),
+        application_application_id int4,
+        primary key (degree_id)
+    );
+
+    create table departments (
+        dept_id int4 not null,
+        name varchar(255),
+        primary key (dept_id)
+    );
+
+    create table gappUsers (
+        user_id int4 not null,
+        email varchar(255),
+        first_name varchar(255),
+        last_name varchar(255),
+        password varchar(255),
+        role_role_id int4,
+        primary key (user_id)
+    );
+
+    create table programs (
+        program_id int4 not null,
+        name varchar(255),
+        dept_dept_id int4,
+        primary key (program_id)
+    );
+
+    create table roles (
+        role_id int4 not null,
+        role_type varchar(255),
+        primary key (role_id)
+    );
+
+    create table terms (
+        term_id int4 not null,
+        term varchar(255),
+        primary key (term_id)
+    );
+
+    alter table additionalField 
+        add constraint FK_8mfsbw4jtl4wtatbfdxk3pui8 
+        foreign key (dept_dept_id) 
+        references departments;
+
+    alter table additionalFieldValue 
+        add constraint FK_keuvrj2wymkff3ur4mgqfuq4t 
+        foreign key (application_application_id) 
+        references applications;
+
+    alter table additionalFieldValue 
+        add constraint FK_4kvi5jdng2xyn7tmhdcq3vaqm 
+        foreign key (field_field_id) 
+        references additionalField;
+
+    alter table applications 
+        add constraint FK_hjxk94sfig4051etpwlkhmovo 
+        foreign key (dept_dept_id) 
+        references departments;
+
+    alter table applications 
+        add constraint FK_pyk1en13i54d1kqesfvrrwdc1 
+        foreign key (program_program_id) 
+        references programs;
+
+    alter table applications 
+        add constraint FK_kcvgm8wkufnd1xp5xd4bxkqof 
+        foreign key (status_status_id) 
+        references applicationstatus;
+
+    alter table applications 
+        add constraint FK_r7tsf5girf3c3q93ria2k57cu 
+        foreign key (term_term_id) 
+        references terms;
+
+    alter table applications 
+        add constraint FK_bluanikenmrafi5adj9w2oivc 
+        foreign key (user_user_id) 
+        references gappUsers;
+
+    alter table degrees 
+        add constraint FK_15by4fik7nk18bs89i5phh9m1 
+        foreign key (application_application_id) 
+        references applications;
+
+    alter table gappUsers 
+        add constraint FK_1f4xf9n41phwwyll9i34oacei 
+        foreign key (role_role_id) 
+        references roles;
+
+    alter table programs 
+        add constraint FK_bvnv211p91vsohkggjqtvq7kx 
+        foreign key (dept_dept_id) 
+        references departments;
+
+    create sequence hibernate_sequence;
+
+
+INSERT INTO roles VALUES (1,'admin');
+INSERT INTO roles VALUES (2,'staff');
+INSERT INTO roles VALUES (3,'student');
+
+INSERT INTO gappusers VALUES (1,'admin@localhost.localdomain', 'admin', null , 'abcd', 1 );
+INSERT INTO gappusers VALUES (2,'staff1@localhost.localdomain', 'Ned', 'Stak', 'abcd', 2 );
+INSERT INTO gappusers VALUES (3,'staff2@localhost.localdomain', 'Cat', 'Stak', 'abcd', 2 );
+INSERT INTO gappusers VALUES (4,'student1@localhost.localdomain', 'John', 'Snow', 'abcd', 3 );
+INSERT INTO gappusers VALUES (5,'student2@localhost.localdomain', 'Danerys', 'Tagerian', 'abcd', 3 );
+
+INSERT INTO departments VALUES (1,'Accounting');
+INSERT INTO departments VALUES (2,'Computer Science');
+
+INSERT INTO programs VALUES (1,'MS in Accounting', 1);
+INSERT INTO programs VALUES (2,'MS in Computer Science', 2);
+
+INSERT INTO additionalfield VALUES (1,'GMAT', true, 'Number', 1 );
+
+INSERT INTO terms VALUES (1,'Fall 2016');
+
+INSERT INTO applicationstatus VALUES (1,'New');
+INSERT INTO applicationstatus VALUES (2,'Pending Review');
+INSERT INTO applicationstatus VALUES (3,'Denied');
+INSERT INTO applicationstatus VALUES (4,'Recommend Admit');
+INSERT INTO applicationstatus VALUES (5,'Recommend Admit w/ Condition');
+
+
+INSERT INTO applications VALUES (1, 301, 'USA', '05-13-1990', 'Male', null, null, 1, 1, 1, 1, 4);
+
+
+select * from roles;
+select * from gappusers;
+select * from departments;
+select * from programs;
+select * from additionalfield;
+select * from terms;
+select * from applicationstatus;
+select * from applications;
+
+
+

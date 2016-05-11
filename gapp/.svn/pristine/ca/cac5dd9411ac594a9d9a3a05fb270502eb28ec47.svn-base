@@ -1,0 +1,175 @@
+package gapp.model;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "applications")
+public class Applications implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue	
+	private Integer application_id;   	
+	private Integer cin;		
+	private String gender;	
+	private Date dob;	
+	private String citizenship;
+    private Integer toefl;			
+	private Byte[] transcript;
+	
+	
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	private Gappusers user;
+	
+	
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	private Departments dept;	
+	
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	private Terms term;
+	
+	@OneToMany(mappedBy="application", cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Degrees> degree;
+	
+	
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	private ApplicationStatus status;
+	
+	@OneToMany(mappedBy="application", cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	private List<AdditionalFieldValue> af_value;
+	
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	private Programs program;
+	
+	public Applications()
+	{
+		
+	}
+
+	public Integer getApplication_id() {
+		return application_id;
+	}
+
+	public void setApplication_id(Integer application_id) {
+		this.application_id = application_id;
+	}
+
+	public Integer getCin() {
+		return cin;
+	}
+
+	public void setCin(Integer cin) {
+		this.cin = cin;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getCitizenship() {
+		return citizenship;
+	}
+
+	public void setCitizenship(String citizenship) {
+		this.citizenship = citizenship;
+	}
+	
+	public Integer getToefl() {
+		return toefl;
+	}
+
+	public void setToefl(Integer toefl) {
+		this.toefl = toefl;
+	}
+
+	public Byte[] getTranscript() {
+		return transcript;
+	}
+
+	public void setTranscript(Byte[] transcript) {
+		this.transcript = transcript;
+	}
+
+	public Gappusers getUser() {
+		return user;
+	}
+
+	public void setUser(Gappusers user) {
+		this.user = user;
+	}
+
+	public Departments getDept() {
+		return dept;
+	}
+
+	public void setDept(Departments dept) {
+		this.dept = dept;
+	}
+
+	public Terms getTerm() {
+		return term;
+	}
+
+	public void setTerm(Terms term) {
+		this.term = term;
+	}
+
+	public List<Degrees> getDegree() {
+		return degree;
+	}
+
+	public void setDegree(List<Degrees> degree) {
+		this.degree = degree;
+	}
+
+	public ApplicationStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ApplicationStatus status) {
+		this.status = status;
+	}
+
+	public List<AdditionalFieldValue> getAf_value() {
+		return af_value;
+	}
+
+	public void setAf_value(List<AdditionalFieldValue> af_value) {
+		this.af_value = af_value;
+	}
+
+	public Programs getProgram() {
+		return program;
+	}
+
+	public void setProgram(Programs program) {
+		this.program = program;
+	}
+	
+	
+}
